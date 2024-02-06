@@ -5,19 +5,19 @@ namespace Tec
     {
         public void Run()
         {
-            asyncFunc(); //same time run
-            asyncFunc2(); //same time run
+            asyncFunc();
+            asyncFunc2();
         }
 
         private async void asyncFunc()
         {
-            var v = await getData(); //wait
-            Console.WriteLine(v); //after 1000
+            var v = await getData(); //wait, run call thread next Run()
+            Console.WriteLine(v); //run after 1000
         }
         private async void asyncFunc2()
         {
-            var v = await getData(); //wait
-            var v2 = await getData(); //wait
+            var v = await getData(); //wait, run call thread next Run()
+            var v2 = await getData(); //wait, same
             Console.WriteLine(v + v2); //after 2000
         }
 
