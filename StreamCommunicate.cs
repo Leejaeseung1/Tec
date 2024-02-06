@@ -5,14 +5,19 @@ namespace Tec
     {
         private Stream _stream;
 
+        public StreamCommunicate(Stream s)
+        {
+            _stream = s;
+        }
+
         public void Play() //Ex(), do: same time play
         {
-            Ex();
+            ex();
 
             // do
         }
 
-        private async void Ex() //async func
+        private async void ex() //async func
         {
             await WriteAsync(new byte[] { 1, 2 }); //wait write
 
@@ -23,10 +28,6 @@ namespace Tec
             // do after read
         }
 
-        public StreamCommunicate(Stream s)
-        {
-            _stream = s;
-        }
 
         public static ushort CRC16(byte[] data)
         {

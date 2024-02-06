@@ -3,7 +3,7 @@ namespace Tec
 {
     internal class Constructor
     {
-        struct Constructor2
+        private struct Constructor2
         {
             public int A;
             public int B;
@@ -13,7 +13,7 @@ namespace Tec
         public int A;
         public int B;
 
-        void Temp()
+        public void Temp()
         {
             Constructor c = new Constructor()
             {
