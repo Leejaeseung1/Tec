@@ -20,5 +20,12 @@ namespace Tec
 
             //v3 = v2.ToArray();
         }
+
+        public void Declarate()
+        {
+            var v1 = new int[] { 1, 2 };
+            var v2 = new int[1, 2];
+            int[] v3 = [1, 2];
+        }
     }
 }

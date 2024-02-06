@@ -11,7 +11,7 @@ namespace Tec
     {
         public void F()
         {
-            //local func is better than delegate func<T>
+            //local func is better than delegate Func<T>
             int x3() => 3;
             var x4 = () => 4;
             var x5 = () => { return 5; };
