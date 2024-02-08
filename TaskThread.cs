@@ -45,5 +45,23 @@ namespace Tec
             await Task.Delay(1000);
             _action();
         }
+
+        public async void Run3()
+        {
+            var t1 = Task.Delay(1000);
+            var t2 = f3();
+
+            await Task.WhenAny(t1, t2);
+            //t1, t2 any complete, do
+
+            await Task.WhenAll(t1, t2);
+            //t1, t2 all complete, do
+        }
+        private async Task<int> f3()
+        {
+            await Task.Delay(1000);
+            return 1;
+        }
+
     }
 }
