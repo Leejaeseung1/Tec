@@ -8,6 +8,8 @@ namespace Tec
         public StreamCommunicate(Stream s)
         {
             _stream = s;
+            _stream.ReadTimeout = 1000;
+            _stream.WriteTimeout = 1000;
         }
 
         public void Play() //Ex(), do: same time play
@@ -57,7 +59,11 @@ namespace Tec
         {
             try
             {
-                await _stream.WriteAsync(data);
+                //await _stream.WriteAsync(data); // timeout no work //infinity wait
+                await Task.Run(() =>
+                {
+                    _stream.Write(data); //+time catch
+                });
             }
             catch (Exception ex)
             {
@@ -69,10 +75,14 @@ namespace Tec
         {
             const int BUF_SIZE = 512;
             var buffer = new byte[BUF_SIZE];
-            int len;
+            int len = 0;
             try
             {
-                len = await _stream.ReadAsync(buffer);
+                //len = await _stream.ReadAsync(buffer); //timeout no work
+                await Task.Run(() =>
+                {
+                    len = _stream.Read(buffer);
+                });
             }
             catch (Exception e)
             {
@@ -85,4 +95,3 @@ namespace Tec
         }
     }
 }
-
