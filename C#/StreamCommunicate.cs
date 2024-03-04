@@ -3,13 +3,13 @@ namespace Tec
 {
     internal class StreamCommunicate
     {
+        private const int TIMEOUT = 1000;
+
         private Stream _stream;
 
         public StreamCommunicate(Stream s)
         {
             _stream = s;
-            _stream.ReadTimeout = 1000;
-            _stream.WriteTimeout = 1000;
         }
 
         public void Play() //Ex(), do: same time play
@@ -30,8 +30,7 @@ namespace Tec
             // do after read
         }
 
-
-        public static ushort CRC16(byte[] data)
+        public static ushort CRC16(byte[] data) //make crc16
         {
             var size = data.Length;
 
@@ -59,11 +58,16 @@ namespace Tec
         {
             try
             {
+                //await Task.Run(() =>
+                //{
+                //    _stream.ReadTimeout = TIMEOUT;
+                //    _stream.WriteTimeout = TIMEOUT;
+                //    _stream.Write(data); //timeout catch, but make task.run()
+                //});
+
                 //await _stream.WriteAsync(data); // timeout no work //infinity wait
-                await Task.Run(() =>
-                {
-                    _stream.Write(data); //+time catch
-                });
+
+                await timeout(_stream.WriteAsync(data).AsTask(), TIMEOUT);
             }
             catch (Exception ex)
             {
@@ -78,11 +82,7 @@ namespace Tec
             int len = 0;
             try
             {
-                //len = await _stream.ReadAsync(buffer); //timeout no work
-                await Task.Run(() =>
-                {
-                    len = _stream.Read(buffer);
-                });
+                len = await timeout(_stream.ReadAsync(buffer, 0, BUF_SIZE), TIMEOUT);
             }
             catch (Exception e)
             {
@@ -92,6 +92,28 @@ namespace Tec
             var data = new byte[len];
             Array.Copy(buffer, data, len);
             return data;
+        }
+
+        private async Task timeout(Task t, int millisecs) //return void
+        {
+            var v = await Task.WhenAny(t, Task.Delay(millisecs));
+
+            if (v != t)
+            {
+                throw new TimeoutException("timeout");
+            }
+        }
+
+        private async Task<T> timeout<T>(Task<T> t, int millisecs) //return <T>
+        {
+            var v = await Task.WhenAny(t, Task.Delay(millisecs));
+
+            if (v != t)
+            {
+                throw new TimeoutException("timeout");
+            }
+
+            return t.Result;
         }
     }
 }
