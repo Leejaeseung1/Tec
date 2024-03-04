@@ -104,7 +104,7 @@ namespace Tec
 
         public void Run5()
         {
-            Task.Delay(1000).Wait(1000); // == Thread.Sleep(1000);
+            Task.Delay(1000).Wait(); // == Thread.Sleep(1000);
         }
     }
 }
