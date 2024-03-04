@@ -101,5 +101,10 @@ namespace Tec
             await Task.Delay(1000);
             _cts.Cancel();
         }
+
+        public void Run5()
+        {
+            Task.Delay(1000).Wait(1000); // == Thread.Sleep(1000);
+        }
     }
 }
