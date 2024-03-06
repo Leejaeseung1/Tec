@@ -1,0 +1,46 @@
+﻿<!--x:Class = window namespace.class-->
+<!--convert use xmlns:c="clr-namespace:Main.Converter"-->
+<Window x:Class="Main.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Main.View"
+        xmlns:c="clr-namespace:Main.Converter"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+    <!--convert declare-->
+    <Window.Resources>
+        <c:TestConvert x:Key="TestConvert"/>
+    </Window.Resources>
+
+    <Grid>
+        <!--Grid.RowDefinitions: divide window to row-->
+        <!--RowDefinitions: each row-->
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!--DisplayMemberPath is show from ItemsSource's property-->
+        <!--ItemsSource is data list-->
+        <ListView 
+            Grid.Row="0"
+            DisplayMemberPath="Id1"
+            ItemsSource="{Binding Data}"
+            SelectedItem="{Binding SelectedId}"
+            BorderThickness="1"
+            BorderBrush="Black"
+            Margin="10">
+        </ListView>
+        
+        <!--sequentially sort panel-->
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <Label Margin="5" Content="{Binding SelectedId.Id1}"/>
+            <Label Margin="5" Content="{Binding SelectedId.Id2}"/>
+            <Label Margin="5" Content="{Binding SelectedId.Id3}"/>
+            <Label Margin="5" Content="{Binding SelectedId.Id3, Converter={StaticResource TestConvert}}"/>
+        </StackPanel>
+    </Grid>
+</Window>
