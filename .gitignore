@@ -2,12 +2,7 @@
 # 이 .gitignore 파일은 Microsoft(R) Visual Studio에서 자동으로 만들어졌습니다.
 ################################################################################
 
-/.vs
-/C#/obj
-/WpfApp/bin/Debug/net8.0-windows
-/WpfApp/obj
-/C#/bin/Debug/net8.0
-/C#/Program.cs
 /C#Console/.vs
 /C#Console/C#/bin/Debug/net8.0
 /C#Console/C#/obj
+/C#Console/C#/Program.cs
