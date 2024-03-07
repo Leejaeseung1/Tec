@@ -29,7 +29,7 @@ namespace C_.Code
             File.WriteAllText(path, jsonString);
         }
 
-        public T[] GetDatasFromJson<T>(string jsonPath) where T : class
+        public T[] GetDatasFromJson<T>(string jsonPath)
         {
             var str = File.ReadAllText(jsonPath);
 
