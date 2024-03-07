@@ -1,7 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Main.Model;
-using System.Windows;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Main.ViewModel
 {
