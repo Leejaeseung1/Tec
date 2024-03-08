@@ -10,3 +10,6 @@
 /Wpf/Main/bin/Debug/net8.0-windows
 /Wpf/Main/obj
 /Wpf/.vs/ProjectEvaluation
+/.vs
+/C#/bin/Debug/net8.0
+/C#/obj
