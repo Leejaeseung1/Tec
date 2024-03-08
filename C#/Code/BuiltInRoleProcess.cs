@@ -33,7 +33,9 @@ namespace C_.Code
                     throw new Exception("manage fail", ex);
                 }
                 //success
+                Environment.Exit(0); //before exe exit
             }
+            //admin exe
         }
 
         private bool isAdministrator()
