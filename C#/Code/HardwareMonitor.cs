@@ -35,33 +35,39 @@ namespace C_.Code
             _builtInRole = new BuiltInRoleProcess();
         }
 
-        public void Open()
+        public async Task Open()
         {
-            _builtInRole.GetAdministrator();
-            _com.Open();
+            await _builtInRole.GetAdministrator();
+            await Task.Run(() =>
+            {
+                _com.Open();
+            });
         }
 
-        public string GetInfoAfterUpdate()
+        public async Task<string> GetInfoAfterUpdate()
         {
             const string FAIL_VALUE = "-1"; //if no administrator, value is "-1"
 
             var sb = new StringBuilder();
 
-            foreach (var hard in _com.Hardware)
+            await Task.Run(() =>
             {
-                hard.Update();
-                foreach (var sub in hard.SubHardware)
+                foreach (var hard in _com.Hardware)
                 {
-                    sub.Update();
-                }
+                    hard.Update();
+                    foreach (var sub in hard.SubHardware)
+                    {
+                        sub.Update();
+                    }
 
-                foreach (var sensor in hard.Sensors)
-                {
-                    string value = sensor.Value.HasValue ? sensor.Value.Value.ToString() : FAIL_VALUE;
-                    string text = $"{sensor.Name} {sensor.SensorType} = {value}";
-                    sb.AppendLine(text);
+                    foreach (var sensor in hard.Sensors)
+                    {
+                        string value = sensor.Value.HasValue ? sensor.Value.Value.ToString() : FAIL_VALUE;
+                        string text = $"{sensor.Name} {sensor.SensorType} = {value}";
+                        sb.AppendLine(text);
+                    }
                 }
-            }
+            });
             return sb.ToString();
         }
     }

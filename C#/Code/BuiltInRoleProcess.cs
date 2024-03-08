@@ -10,7 +10,7 @@ namespace C_.Code
     {
         public const string WINDOWS = "windows";
 
-        public void GetAdministrator()
+        public async Task GetAdministrator()
         {
             if (!isAdministrator())
             {
@@ -26,7 +26,10 @@ namespace C_.Code
 
                 try
                 {
-                    Process.Start(procInfo);
+                    await Task.Run(() =>
+                    {
+                        Process.Start(procInfo);
+                    });
                 }
                 catch (Exception ex)
                 {
