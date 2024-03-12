@@ -106,5 +106,17 @@ namespace Tec
         {
             Task.Delay(1000).Wait(); // == Thread.Sleep(1000);
         }
+
+        public void Run6()
+        {
+            var task = r6();
+            //task.Wait(); //even if no use
+            var result = task.Result; //wait 1000
+        }
+        private async Task<int> r6()
+        {
+            await Task.Delay(1000);
+            return 3;
+        }
     }
 }
