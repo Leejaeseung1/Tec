@@ -1,4 +1,6 @@
 ﻿
+using System.Text;
+
 namespace Tec
 {
     internal class StreamCommunicate
@@ -54,6 +56,11 @@ namespace Tec
             return (ushort)cr;
         }
 
+        public Task WriteAsync(string data)
+        {
+            return WriteAsync(Encoding.UTF8.GetBytes(data));
+        }
+
         public async Task WriteAsync(byte[] data)
         {
             try
@@ -75,7 +82,29 @@ namespace Tec
             }
         }
 
-        public async Task<byte[]> ReadAsync()
+        public async Task<T> ReadAsync<T>()
+        {
+            var data = await readAsync();
+            object o = null;
+
+            if (typeof(T) == typeof(byte[]))
+            {
+                o = data;
+            }
+            if (typeof(T) == typeof(string))
+            {
+                o = Encoding.UTF8.GetString(data);
+            }
+
+            if (o is null)
+            {
+                throw new Exception("receive fail");
+            }
+
+            return (T)o;
+        }
+
+        private async Task<byte[]> readAsync()
         {
             const int BUF_SIZE = 512;
             var buffer = new byte[BUF_SIZE];
