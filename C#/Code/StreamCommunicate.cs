@@ -27,7 +27,7 @@ namespace Tec
 
             // do after write
 
-            var data = await ReadAsync(); //wait read
+            var data = await ReadAsync<byte[]>(); //wait read
 
             // do after read
         }
