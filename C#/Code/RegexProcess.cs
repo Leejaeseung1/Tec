@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Tec
 {
-    internal partial class RegexProcess
+    internal class RegexProcess
     {
         public void F()
         {
