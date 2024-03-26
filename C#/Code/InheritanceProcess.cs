@@ -1,5 +1,4 @@
-﻿
-namespace C_
+﻿namespace C_.Code
 {
     //interface is function
     //abstract is inheritance

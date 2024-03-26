@@ -6,7 +6,7 @@ namespace C_.Code
 {
     /// <summary>
     /// need administrator
-    /// need LibreHardwareMonitorLib nuget (this is 0.9.3)
+    /// LibreHardwareMonitorLib (0.9.3)
     /// </summary>
     [SupportedOSPlatform(BuiltInRoleProcess.WINDOWS)]
     internal class HardwareMonitor
